@@ -1,0 +1,24 @@
+extends layout
+ 
+block content
+  - function isEmptyObject(obj) {
+  -      var name;
+  -         console.log(obj);
+  -      for (name in obj) {
+  -        return false;
+  -      }
+  -      return true;
+  -    }
+
+    h1= title 
+
+    ul  
+      - each error in errors
+        li= error.msg
+
+    form(action='/',method='post')
+        div.input
+            span.label Title
+            input(type="email", name="email")
+        div.actions
+            input(type="submit", value="add")

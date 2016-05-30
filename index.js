@@ -1,10 +1,13 @@
-var express = require('express');
-var routes = require('./routes/index');
+var express = require('express'),
+  expressValidator = require('express-validator')
+  routes = require('./routes/index'),
+  routesAdmin = require('./routes/admin');
 var path = require('path');
 //var router = express.Router();
 
 var bodyParser = require('body-parser');
 var cookiePrser = require('cookie-parser');
+var expressSession = require('express-session');
 
 var app = express();
 
@@ -13,9 +16,24 @@ app.set('port',process.env.PORT||3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','jade');
 
+app.use(expressSession({ resave: true,
+                  saveUninitialized: true,
+                  secret: 'uwotm8'}))
+
+app.use(cookiePrser());
+
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.use(expressValidator()); 
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', routes);
+app.post('/', routes);
+app.get('/admin', routesAdmin);
 
 app.use(function(req,res,next){
 	var err = new Error('Not Found');

@@ -12,6 +12,9 @@
     "body-parser": "^1.15.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "express-validator": "^2.20.5",
+    "forms-generator": "^1.0.4",
     "jade": "^1.11.0",
     "path": "^0.12.7"
   }
